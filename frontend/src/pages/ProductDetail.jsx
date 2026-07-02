@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useProduct } from '../hooks/useProduct.js';
 import { useRelatedProducts } from '../hooks/useRelatedProducts.js';
@@ -7,6 +8,7 @@ import WishlistButton from '../components/product/WishlistButton.jsx';
 import ShareButtons from '../components/product/ShareButtons.jsx';
 import RelatedProducts from '../components/product/RelatedProducts.jsx';
 import { formatPrice } from '../utils/formatPrice.js';
+import { useRecentlyViewed } from '../context/RecentlyViewedContext.jsx';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -14,6 +16,11 @@ export default function ProductDetail() {
   const { products: related, loading: relatedLoading } = useRelatedProducts(
     product?._id
   );
+  const { recordView } = useRecentlyViewed();
+
+  useEffect(() => {
+    if (product?._id) recordView(product._id);
+  }, [product?._id, recordView]);
 
   if (loading) {
     return (

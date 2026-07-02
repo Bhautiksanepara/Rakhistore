@@ -1,6 +1,7 @@
 import Hero from '../components/home/Hero.jsx';
 import ProductShowcase from '../components/home/ProductShowcase.jsx';
 import CategoryShowcase from '../components/home/CategoryShowcase.jsx';
+import RecentlyViewedSection from '../components/home/RecentlyViewedSection.jsx';
 import WhyChooseUs from '../components/home/WhyChooseUs.jsx';
 import Testimonials from '../components/home/Testimonials.jsx';
 import FAQPreview from '../components/home/FAQPreview.jsx';
@@ -21,6 +22,7 @@ export default function Home() {
         params={{ newArrival: true, limit: 4 }}
         viewAllHref="/shop?newArrival=true"
       />
+      <RecentlyViewedSection />
       <WhyChooseUs />
       <Testimonials />
       <FAQPreview />
