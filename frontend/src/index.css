@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-saffron: #ff9933;
+  --color-saffron-light: #ffb366;
+  --color-maroon: #7a1f2b;
+  --color-maroon-deep: #5a1620;
+  --color-gold: #d4af37;
+  --color-gold-light: #e8c766;
+  --color-cream: #fff8ed;
+  --color-beige: #f3e5d3;
+
+  --font-heading: "Marcellus", ui-serif, Georgia, serif;
+  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-maroon-deep);
+}
+
+.dark body {
+  background-color: var(--color-maroon-deep);
+  color: var(--color-cream);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
