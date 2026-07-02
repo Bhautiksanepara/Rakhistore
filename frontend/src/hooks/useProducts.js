@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../services/api/products.api.js';
 
 const EMPTY = { items: [], total: 0, page: 1, pages: 1 };
@@ -8,6 +8,15 @@ export function useProducts(params) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const key = JSON.stringify(params);
+
+  const refetch = useCallback(() => {
+    setLoading(true);
+    return getProducts(JSON.parse(key))
+      .then((res) => setData(res))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
 
   useEffect(() => {
     let ignore = false;
@@ -28,5 +37,5 @@ export function useProducts(params) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
-  return { ...data, loading, error };
+  return { ...data, loading, error, refetch };
 }

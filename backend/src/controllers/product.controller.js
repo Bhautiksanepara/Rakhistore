@@ -65,6 +65,15 @@ export const getProductBySlug = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, product));
 });
 
+export const getProductById = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id).populate(
+    'category',
+    'name slug'
+  );
+  if (!product) throw new ApiError(404, 'Product not found');
+  res.status(200).json(new ApiResponse(200, product));
+});
+
 export const getRelatedProducts = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (!product) throw new ApiError(404, 'Product not found');

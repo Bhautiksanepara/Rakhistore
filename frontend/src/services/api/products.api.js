@@ -15,6 +15,11 @@ export async function getRelatedProducts(id) {
   return data.data;
 }
 
+export async function getProductById(id) {
+  const { data } = await axiosClient.get(`/admin/products/${id}`);
+  return data.data;
+}
+
 export async function createProduct(payload) {
   const { data } = await axiosClient.post('/admin/products', payload);
   return data.data;

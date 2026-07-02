@@ -8,6 +8,7 @@ import {
   deleteProduct,
   duplicateProduct,
   bulkDeleteProducts,
+  getProductById,
 } from '../controllers/product.controller.js';
 import {
   createCategory,
@@ -37,6 +38,7 @@ router.get('/stats', getStats);
 router.post('/upload', upload.single('image'), uploadImage);
 router.post('/upload/delete', deleteImage);
 
+router.get('/products/:id', productIdValidator, validate, getProductById);
 router.post('/products', createProductValidator, validate, createProduct);
 router.put('/products/:id', updateProductValidator, validate, updateProduct);
 router.delete('/products/:id', productIdValidator, validate, deleteProduct);
