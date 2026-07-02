@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout.jsx';
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import ProtectedRoute from '../components/admin/ProtectedRoute.jsx';
+import { AuthProvider } from '../context/AuthContext.jsx';
 
 const Home = lazy(() => import('../pages/Home.jsx'));
 const Shop = lazy(() => import('../pages/Shop.jsx'));
@@ -32,6 +33,16 @@ function RouteFallback() {
   );
 }
 
+// Scopes the admin-session check to /admin/* only, so public storefront
+// pages never fire an unauthenticated /auth/me request.
+function AdminSection() {
+  return (
+    <AuthProvider>
+      <Outlet />
+    </AuthProvider>
+  );
+}
+
 export default function AppRouter() {
   return (
     <Suspense fallback={<RouteFallback />}>
@@ -50,20 +61,19 @@ export default function AppRouter() {
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route element={<ProtectedRoute />}>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route
-              path="/admin/products/new"
-              element={<AdminProductForm />}
-            />
-            <Route
-              path="/admin/products/:id/edit"
-              element={<AdminProductForm />}
-            />
-            <Route path="/admin/categories" element={<AdminCategories />} />
+        <Route path="/admin" element={<AdminSection />}>
+          <Route path="login" element={<AdminLogin />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="products/new" element={<AdminProductForm />} />
+              <Route
+                path="products/:id/edit"
+                element={<AdminProductForm />}
+              />
+              <Route path="categories" element={<AdminCategories />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
