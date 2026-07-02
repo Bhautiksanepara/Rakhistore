@@ -61,12 +61,12 @@ export default function Shop() {
           : `${total} product${total === 1 ? '' : 's'} found`}
       </p>
 
-      <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <SearchBar
           value={search}
           onChange={(value) => updateParam('search', value)}
         />
-        <div className="flex gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:flex sm:w-auto sm:shrink-0">
           <CategoryFilter
             value={category}
             onChange={(value) => updateParam('category', value)}

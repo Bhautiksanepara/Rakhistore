@@ -10,6 +10,7 @@ import {
 } from '../../services/api/products.api.js';
 import { formatPrice } from '../../utils/formatPrice.js';
 import { optimizeImageUrl } from '../../utils/cloudinary.js';
+import ProductMobileCard from '../../components/admin/ProductMobileCard.jsx';
 
 export default function Products() {
   const [search, setSearch] = useState('');
@@ -105,7 +106,42 @@ export default function Products() {
         )}
       </div>
 
-      <div className="mt-6 overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-beige/60 dark:bg-maroon dark:ring-maroon-deep/60">
+      {/* Mobile/tablet: card list. The table needs ~1024px+ to fit its five
+          columns alongside the sidebar, so this covers the sidebar's own
+          md-and-up range too, not just phone widths. */}
+      <div className="mt-6 space-y-3 lg:hidden">
+        {!loading && items.length > 0 && (
+          <label className="flex items-center gap-2 px-1 text-sm text-maroon-deep/70 dark:text-cream/70">
+            <input
+              type="checkbox"
+              checked={selected.length === items.length}
+              onChange={toggleSelectAll}
+            />
+            Select all
+          </label>
+        )}
+        {loading ? (
+          <p className="py-8 text-center text-maroon-deep/50">Loading…</p>
+        ) : items.length === 0 ? (
+          <p className="py-8 text-center text-maroon-deep/50">
+            No products found.
+          </p>
+        ) : (
+          items.map((product) => (
+            <ProductMobileCard
+              key={product._id}
+              product={product}
+              selected={selected.includes(product._id)}
+              onToggleSelect={() => toggleSelect(product._id)}
+              onDuplicate={() => handleDuplicate(product._id)}
+              onDelete={() => handleDelete(product._id)}
+            />
+          ))
+        )}
+      </div>
+
+      {/* Desktop: full table */}
+      <div className="mt-6 hidden overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-beige/60 dark:bg-maroon dark:ring-maroon-deep/60 lg:block">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-beige/60 text-xs uppercase text-maroon-deep/50 dark:border-maroon-deep/60 dark:text-cream/50">
             <tr>

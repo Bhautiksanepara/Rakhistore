@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImageUploader from '../../components/admin/ImageUploader.jsx';
+import Dropdown from '../../components/common/Dropdown.jsx';
 import { useCategories } from '../../hooks/useCategories.js';
 import {
   createProduct,
@@ -23,6 +24,7 @@ export default function ProductForm() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -187,18 +189,27 @@ export default function ProductForm() {
           >
             Category
           </label>
-          <select
-            id="category"
-            {...register('category', { required: 'Category is required' })}
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
-          >
-            <option value="">Select a category</option>
-            {categories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
+          <Controller
+            name="category"
+            control={control}
+            rules={{ required: 'Category is required' }}
+            render={({ field }) => (
+              <Dropdown
+                id="category"
+                options={[
+                  { value: '', label: 'Select a category' },
+                  ...categories.map((cat) => ({
+                    value: cat._id,
+                    label: cat.name,
+                  })),
+                ]}
+                value={field.value}
+                onChange={field.onChange}
+                ariaLabel="Category"
+                className="mt-1 w-full"
+              />
+            )}
+          />
           {errors.category && (
             <p className="mt-1 text-xs text-red-600">
               {errors.category.message}

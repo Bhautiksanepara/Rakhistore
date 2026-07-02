@@ -1,26 +1,22 @@
 import PropTypes from 'prop-types';
+import Dropdown from '../common/Dropdown.jsx';
 
 const OPTIONS = [
   { value: 'newest', label: 'Newest' },
-  { value: 'price_asc', label: 'Price: Low to High' },
-  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'price_asc', label: 'Price: Low to High', shortLabel: 'Price ↑' },
+  { value: 'price_desc', label: 'Price: High to Low', shortLabel: 'Price ↓' },
   { value: 'featured', label: 'Featured' },
 ];
 
 export default function SortDropdown({ value, onChange }) {
   return (
-    <select
+    <Dropdown
+      options={OPTIONS}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
-      aria-label="Sort products"
-      className="rounded-full border border-beige bg-white px-4 py-2 text-sm text-maroon-deep focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
-    >
-      {OPTIONS.map((opt) => (
-        <option key={opt.value} value={opt.value}>
-          {opt.label}
-        </option>
-      ))}
-    </select>
+      onChange={onChange}
+      ariaLabel="Sort products"
+      className="w-full sm:w-44"
+    />
   );
 }
 
