@@ -10,16 +10,14 @@ const categorySchema = new mongoose.Schema(
       url: { type: String, default: '' },
       publicId: { type: String, default: '' },
     },
-    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
 
-categorySchema.pre('validate', function (next) {
+categorySchema.pre('validate', function () {
   if (this.name && (this.isNew || this.isModified('name'))) {
     this.slug = slugify(this.name, { lower: true, strict: true });
   }
-  next();
 });
 
 export default mongoose.model('Category', categorySchema);
