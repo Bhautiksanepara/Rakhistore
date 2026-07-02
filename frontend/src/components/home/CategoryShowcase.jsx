@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { useCategories } from '../../hooks/useCategories.js';
+import { optimizeImageUrl } from '../../utils/cloudinary.js';
 
 export default function CategoryShowcase() {
   const { categories, loading } = useCategories();
@@ -37,8 +38,9 @@ export default function CategoryShowcase() {
                   >
                     {category.image?.url ? (
                       <img
-                        src={category.image.url}
+                        src={optimizeImageUrl(category.image.url, 100)}
                         alt=""
+                        loading="lazy"
                         className="h-12 w-12 rounded-full object-cover"
                       />
                     ) : (

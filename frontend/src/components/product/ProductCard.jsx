@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { formatPrice } from '../../utils/formatPrice.js';
+import { optimizeImageUrl } from '../../utils/cloudinary.js';
 import { useWishlist } from '../../context/WishlistContext.jsx';
 
 export default function ProductCard({ product }) {
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product._id);
-  const image = product.images?.[0]?.url;
+  const image = optimizeImageUrl(product.images?.[0]?.url, 400);
   const hasDiscount = product.originalPrice > product.price;
   const discount = hasDiscount
     ? Math.round(
@@ -44,12 +45,12 @@ export default function ProductCard({ product }) {
             </span>
           )}
           {product.featured && (
-            <span className="rounded-full bg-gold px-2 py-0.5 text-[10px] font-semibold uppercase text-white">
+            <span className="rounded-full bg-gold px-2 py-0.5 text-[10px] font-semibold uppercase text-maroon-deep">
               Featured
             </span>
           )}
           {discount && (
-            <span className="rounded-full bg-saffron px-2 py-0.5 text-[10px] font-semibold uppercase text-white">
+            <span className="rounded-full bg-saffron px-2 py-0.5 text-[10px] font-semibold uppercase text-maroon-deep">
               {discount}% off
             </span>
           )}

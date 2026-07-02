@@ -3,12 +3,14 @@ import { Outlet } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import AdminSidebar from '../components/admin/AdminSidebar.jsx';
 import ScrollToTop from '../components/common/ScrollToTop.jsx';
+import SEO from '../components/common/SEO.jsx';
 
 export default function AdminLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-beige/30 dark:bg-maroon-deep">
+      <SEO title="Admin" noIndex />
       <ScrollToTop />
 
       <div className="hidden md:block">

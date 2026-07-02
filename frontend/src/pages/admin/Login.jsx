@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
+import SEO from '../../components/common/SEO.jsx';
 
 export default function Login() {
   const { login } = useAuth();
@@ -25,6 +26,7 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-cream px-6 dark:bg-maroon-deep">
+      <SEO title="Admin Login" noIndex />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-lg dark:bg-maroon"
@@ -46,7 +48,7 @@ export default function Login() {
             type="email"
             autoComplete="username"
             {...register('email', { required: true })}
-            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-maroon-deep focus:border-saffron focus:outline-none dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-maroon-deep focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
           />
         </label>
 
@@ -60,7 +62,7 @@ export default function Login() {
             type="password"
             autoComplete="current-password"
             {...register('password', { required: true })}
-            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-maroon-deep focus:border-saffron focus:outline-none dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-maroon-deep focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
           />
         </label>
 

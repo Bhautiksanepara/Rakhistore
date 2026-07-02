@@ -29,7 +29,7 @@ export default function ProductShowcase({
         </div>
         <Link
           to={viewAllHref}
-          className="hidden items-center gap-1 text-sm font-medium text-saffron hover:underline sm:flex"
+          className="hidden items-center gap-1 text-sm font-medium text-saffron-text hover:underline dark:text-saffron sm:flex"
         >
           View all <ArrowRight size={14} />
         </Link>

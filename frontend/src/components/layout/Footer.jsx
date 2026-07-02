@@ -35,7 +35,7 @@ export default function Footer() {
                 <li key={link.to}>
                   <NavLink
                     to={link.to}
-                    className="text-sm text-maroon-deep/70 transition hover:text-saffron dark:text-cream/70"
+                    className="text-sm text-maroon-deep/70 transition hover:text-saffron-text dark:text-cream/70 dark:hover:text-saffron"
                   >
                     {link.label}
                   </NavLink>
@@ -54,7 +54,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
-                className="rounded-full bg-saffron/10 p-2 text-saffron transition hover:bg-saffron hover:text-white"
+                className="rounded-full bg-saffron/10 p-2 text-saffron-text transition hover:bg-saffron hover:text-maroon-deep dark:text-saffron"
               >
                 <MessageCircle size={18} />
               </a>

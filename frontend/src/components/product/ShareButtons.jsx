@@ -35,7 +35,7 @@ export default function ShareButtons({ productName, url }) {
         target="_blank"
         rel="noreferrer"
         aria-label="Share on WhatsApp"
-        className="rounded-full bg-saffron/10 p-2 text-saffron transition hover:bg-saffron hover:text-white"
+        className="rounded-full bg-saffron/10 p-2 text-saffron-text transition hover:bg-saffron hover:text-maroon-deep dark:text-saffron"
       >
         <MessageCircle size={16} />
       </a>
@@ -43,7 +43,7 @@ export default function ShareButtons({ productName, url }) {
         type="button"
         onClick={handleNativeShare}
         aria-label="Share via more apps"
-        className="rounded-full bg-saffron/10 p-2 text-saffron transition hover:bg-saffron hover:text-white"
+        className="rounded-full bg-saffron/10 p-2 text-saffron-text transition hover:bg-saffron hover:text-maroon-deep dark:text-saffron"
       >
         <Share2 size={16} />
       </button>
@@ -51,7 +51,7 @@ export default function ShareButtons({ productName, url }) {
         type="button"
         onClick={handleCopy}
         aria-label={copied ? 'Link copied' : 'Copy link'}
-        className="rounded-full bg-saffron/10 p-2 text-saffron transition hover:bg-saffron hover:text-white"
+        className="rounded-full bg-saffron/10 p-2 text-saffron-text transition hover:bg-saffron hover:text-maroon-deep dark:text-saffron"
       >
         {copied ? <Check size={16} /> : <Link2 size={16} />}
       </button>

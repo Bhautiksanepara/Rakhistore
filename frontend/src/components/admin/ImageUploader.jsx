@@ -56,7 +56,7 @@ export default function ImageUploader({ images, onChange }) {
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={uploading}
-          className="flex h-24 w-24 flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-beige text-maroon-deep/50 transition hover:border-saffron hover:text-saffron disabled:opacity-60 dark:border-maroon dark:text-cream/50"
+          className="flex h-24 w-24 flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-beige text-maroon-deep/50 transition hover:border-saffron hover:text-saffron-text disabled:opacity-60 dark:border-maroon dark:text-cream/50 dark:hover:text-saffron"
         >
           {uploading ? (
             <Loader2 size={20} className="animate-spin" aria-hidden="true" />

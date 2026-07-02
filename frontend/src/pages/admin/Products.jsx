@@ -9,6 +9,7 @@ import {
   bulkDeleteProducts,
 } from '../../services/api/products.api.js';
 import { formatPrice } from '../../utils/formatPrice.js';
+import { optimizeImageUrl } from '../../utils/cloudinary.js';
 
 export default function Products() {
   const [search, setSearch] = useState('');
@@ -71,7 +72,7 @@ export default function Products() {
         </div>
         <Link
           to="/admin/products/new"
-          className="flex items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-white transition hover:bg-saffron-light"
+          className="flex items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-maroon-deep transition hover:bg-saffron-light"
         >
           <Plus size={16} /> Add Product
         </Link>
@@ -90,7 +91,7 @@ export default function Products() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products..."
             aria-label="Search products"
-            className="w-full rounded-full border border-beige bg-white py-2 pl-9 pr-4 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+            className="w-full rounded-full border border-beige bg-white py-2 pl-9 pr-4 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
           />
         </div>
         {selected.length > 0 && (
@@ -150,8 +151,9 @@ export default function Products() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <img
-                        src={product.images?.[0]?.url}
+                        src={optimizeImageUrl(product.images?.[0]?.url, 80)}
                         alt=""
+                        loading="lazy"
                         className="h-10 w-10 rounded-lg bg-beige/40 object-cover"
                       />
                       <div className="min-w-0">

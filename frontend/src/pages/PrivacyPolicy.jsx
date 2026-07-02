@@ -1,6 +1,12 @@
+import SEO from '../components/common/SEO.jsx';
+
 export default function PrivacyPolicy() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
+      <SEO
+        title="Privacy Policy"
+        description="How Rakhi Store handles your information — no online payments, no tracking cookies, WhatsApp-based ordering."
+      />
       <h1 className="font-heading text-4xl text-maroon dark:text-cream">
         Privacy Policy
       </h1>

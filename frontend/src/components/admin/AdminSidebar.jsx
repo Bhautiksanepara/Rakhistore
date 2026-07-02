@@ -37,7 +37,7 @@ export default function AdminSidebar({ onNavigate = undefined }) {
             className={({ isActive }) =>
               `flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition ${
                 isActive
-                  ? 'bg-saffron/10 text-saffron'
+                  ? 'bg-saffron/10 text-saffron-text dark:text-saffron'
                   : 'text-maroon-deep hover:bg-beige/60 dark:text-cream dark:hover:bg-maroon-deep/60'
               }`
             }

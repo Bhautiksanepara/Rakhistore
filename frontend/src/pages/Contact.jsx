@@ -1,9 +1,14 @@
 import { MessageCircle, Mail, Clock } from 'lucide-react';
 import { getWhatsAppBaseLink } from '../utils/whatsapp.js';
+import SEO from '../components/common/SEO.jsx';
 
 export default function Contact() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 text-center">
+      <SEO
+        title="Contact"
+        description="Get in touch with Rakhi Store on WhatsApp or email for questions about orders, delivery, or our Rakhi collection."
+      />
       <h1 className="font-heading text-4xl text-maroon dark:text-cream">
         Get in Touch
       </h1>

@@ -12,8 +12,8 @@ export default function WishlistButton({ productId }) {
       onClick={() => toggleWishlist(productId)}
       className={`flex items-center justify-center gap-2 rounded-full border px-6 py-3 font-medium transition ${
         wishlisted
-          ? 'border-saffron bg-saffron/10 text-saffron'
-          : 'border-beige text-maroon-deep hover:border-saffron hover:text-saffron dark:border-maroon dark:text-cream'
+          ? 'border-saffron bg-saffron/10 text-saffron-text dark:text-saffron'
+          : 'border-beige text-maroon-deep hover:border-saffron hover:text-saffron-text dark:border-maroon dark:text-cream dark:hover:text-saffron'
       }`}
     >
       <Heart size={18} fill={wishlisted ? 'currentColor' : 'none'} />

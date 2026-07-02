@@ -1,4 +1,5 @@
 import { Gem, Heart, Users } from 'lucide-react';
+import SEO from '../components/common/SEO.jsx';
 
 const VALUES = [
   {
@@ -21,6 +22,10 @@ const VALUES = [
 export default function About() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
+      <SEO
+        title="About Us"
+        description="Learn about Rakhi Store — handpicked, premium Rakhis for Raksha Bandhan, ordered with a simple WhatsApp conversation."
+      />
       <h1 className="font-heading text-4xl text-maroon dark:text-cream">
         Our Story
       </h1>

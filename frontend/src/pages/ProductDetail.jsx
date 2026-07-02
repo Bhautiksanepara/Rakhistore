@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from '../components/common/SEO.jsx';
 import { useProduct } from '../hooks/useProduct.js';
 import { useRelatedProducts } from '../hooks/useRelatedProducts.js';
 import ProductGallery from '../components/product/ProductGallery.jsx';
@@ -45,7 +46,7 @@ export default function ProductDetail() {
         </h1>
         <Link
           to="/shop"
-          className="mt-4 inline-block text-saffron hover:underline"
+          className="mt-4 inline-block text-saffron-text hover:underline dark:text-saffron"
         >
           Back to Shop
         </Link>
@@ -61,17 +62,44 @@ export default function ProductDetail() {
       )
     : null;
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    sku: product.sku,
+    image: product.images?.map((img) => img.url),
+    category: product.category?.name,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'INR',
+      price: product.price,
+      availability: product.availability
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+    },
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
+      <SEO
+        title={product.name}
+        description={
+          product.description ||
+          `${product.name} — premium Rakhi available at Rakhi Store.`
+        }
+        image={product.images?.[0]?.url}
+        structuredData={structuredData}
+      />
       <nav
         aria-label="Breadcrumb"
         className="mb-6 text-sm text-maroon-deep/50 dark:text-cream/50"
       >
-        <Link to="/" className="hover:text-saffron">
+        <Link to="/" className="hover:text-saffron-text dark:hover:text-saffron">
           Home
         </Link>{' '}
         /{' '}
-        <Link to="/shop" className="hover:text-saffron">
+        <Link to="/shop" className="hover:text-saffron-text dark:hover:text-saffron">
           Shop
         </Link>{' '}
         / <span>{product.name}</span>
@@ -97,7 +125,7 @@ export default function ProductDetail() {
                 <span className="text-lg text-maroon-deep/40 line-through dark:text-cream/40">
                   {formatPrice(product.originalPrice)}
                 </span>
-                <span className="rounded-full bg-saffron px-2 py-0.5 text-xs font-semibold text-white">
+                <span className="rounded-full bg-saffron px-2 py-0.5 text-xs font-semibold text-maroon-deep">
                   {discount}% off
                 </span>
               </>

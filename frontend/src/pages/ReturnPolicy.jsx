@@ -1,6 +1,12 @@
+import SEO from '../components/common/SEO.jsx';
+
 export default function ReturnPolicy() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
+      <SEO
+        title="Return Policy"
+        description="Return and exchange policy for Rakhi Store orders, handled directly over WhatsApp."
+      />
       <h1 className="font-heading text-4xl text-maroon dark:text-cream">
         Return Policy
       </h1>

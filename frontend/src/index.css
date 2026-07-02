@@ -5,6 +5,11 @@
 @theme {
   --color-saffron: #ff9933;
   --color-saffron-light: #ffb366;
+  /* WCAG-AA-safe (4.5:1+) variant of saffron for text on light
+     backgrounds — the base saffron only reaches ~2:1 against
+     cream/white. Use text-saffron-text in light mode, dark:text-saffron
+     in dark mode (the base color already has 6:1+ against maroon). */
+  --color-saffron-text: #a6470a;
   --color-maroon: #7a1f2b;
   --color-maroon-deep: #5a1620;
   --color-gold: #d4af37;

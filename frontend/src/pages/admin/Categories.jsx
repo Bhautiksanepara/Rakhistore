@@ -53,7 +53,7 @@ export default function Categories() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Couple Rakhi"
-            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
           />
         </div>
         <div className="min-w-[200px] flex-1">
@@ -67,13 +67,13 @@ export default function Categories() {
             id="cat-desc"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon-deep dark:bg-maroon-deep dark:text-cream"
           />
         </div>
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-white transition hover:bg-saffron-light disabled:opacity-60"
+          className="flex items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-maroon-deep transition hover:bg-saffron-light disabled:opacity-60"
         >
           <Plus size={16} /> Add
         </button>

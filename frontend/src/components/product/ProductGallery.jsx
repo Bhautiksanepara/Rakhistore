@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { optimizeImageUrl } from '../../utils/cloudinary.js';
 
 export default function ProductGallery({ images, productName }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -14,14 +15,15 @@ export default function ProductGallery({ images, productName }) {
     );
   }
 
-  const activeImage = images[activeIndex].url;
+  const activeImage = optimizeImageUrl(images[activeIndex].url, 800);
+  const zoomImage = optimizeImageUrl(images[activeIndex].url, 1200);
 
   const handleMouseMove = (e) => {
     const rect = containerRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     setZoomStyle({
-      backgroundImage: `url(${activeImage})`,
+      backgroundImage: `url(${zoomImage})`,
       backgroundPosition: `${x}% ${y}%`,
       opacity: 1,
     });
@@ -65,8 +67,9 @@ export default function ProductGallery({ images, productName }) {
               }`}
             >
               <img
-                src={image.url}
+                src={optimizeImageUrl(image.url, 100)}
                 alt=""
+                loading="lazy"
                 className="h-full w-full object-cover"
               />
             </button>

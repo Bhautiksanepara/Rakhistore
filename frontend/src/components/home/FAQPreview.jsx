@@ -14,7 +14,7 @@ export default function FAQPreview() {
       <div className="mt-6 text-center">
         <Link
           to="/faq"
-          className="text-sm font-medium text-saffron hover:underline"
+          className="text-sm font-medium text-saffron-text hover:underline dark:text-saffron"
         >
           View all FAQs
         </Link>

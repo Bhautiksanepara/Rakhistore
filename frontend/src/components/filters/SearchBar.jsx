@@ -15,7 +15,7 @@ export default function SearchBar({ value, onChange }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search Rakhis..."
         aria-label="Search Rakhis"
-        className="w-full rounded-full border border-beige bg-white py-2 pl-10 pr-4 text-sm text-maroon-deep focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+        className="w-full rounded-full border border-beige bg-white py-2 pl-10 pr-4 text-sm text-maroon-deep focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
+import SEO from '../components/common/SEO.jsx';
 import SearchBar from '../components/filters/SearchBar.jsx';
 import CategoryFilter from '../components/filters/CategoryFilter.jsx';
 import SortDropdown from '../components/filters/SortDropdown.jsx';
@@ -47,6 +48,10 @@ export default function Shop() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
+      <SEO
+        title="Shop"
+        description="Browse and filter our full collection of premium Rakhis by category, price, and availability."
+      />
       <h1 className="font-heading text-3xl text-maroon dark:text-cream">
         Shop Rakhis
       </h1>
@@ -89,7 +94,7 @@ export default function Shop() {
               onClick={() => goToPage(i + 1)}
               className={`h-9 w-9 rounded-full text-sm font-medium transition ${
                 page === i + 1
-                  ? 'bg-saffron text-white'
+                  ? 'bg-saffron text-maroon-deep'
                   : 'bg-white text-maroon-deep hover:bg-saffron/10 dark:bg-maroon dark:text-cream'
               }`}
             >

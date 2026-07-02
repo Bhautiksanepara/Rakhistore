@@ -119,7 +119,7 @@ export default function ProductForm() {
           <input
             id="name"
             {...register('name', { required: 'Name is required' })}
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
           />
           {errors.name && (
             <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
@@ -137,7 +137,7 @@ export default function ProductForm() {
             id="description"
             rows={3}
             {...register('description')}
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
           />
         </div>
 
@@ -157,7 +157,7 @@ export default function ProductForm() {
                 required: 'Price is required',
                 min: { value: 0, message: 'Must be positive' },
               })}
-              className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+              className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
             />
             {errors.price && (
               <p className="mt-1 text-xs text-red-600">{errors.price.message}</p>
@@ -175,7 +175,7 @@ export default function ProductForm() {
               type="number"
               step="0.01"
               {...register('originalPrice')}
-              className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+              className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
             />
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function ProductForm() {
           <select
             id="category"
             {...register('category', { required: 'Category is required' })}
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
           >
             <option value="">Select a category</option>
             {categories.map((cat) => (
@@ -217,7 +217,7 @@ export default function ProductForm() {
             id="tags"
             {...register('tags')}
             placeholder="golden, premium, zardosi"
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
           />
         </div>
 
@@ -251,7 +251,7 @@ export default function ProductForm() {
           <button
             type="submit"
             disabled={saving}
-            className="rounded-full bg-saffron px-6 py-2.5 text-sm font-medium text-white transition hover:bg-saffron-light disabled:opacity-60"
+            className="rounded-full bg-saffron px-6 py-2.5 text-sm font-medium text-maroon-deep transition hover:bg-saffron-light disabled:opacity-60"
           >
             {saving ? 'Saving…' : isEdit ? 'Save Changes' : 'Add Product'}
           </button>

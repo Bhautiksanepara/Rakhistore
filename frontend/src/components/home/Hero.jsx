@@ -54,7 +54,7 @@ export default function Hero() {
         >
           <Link
             to="/shop"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-saffron px-8 py-3 font-medium text-white shadow-lg shadow-saffron/30 transition hover:bg-saffron-light"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-saffron px-8 py-3 font-medium text-maroon-deep shadow-lg shadow-saffron/30 transition hover:bg-saffron-light"
           >
             Explore Collection
             <ArrowRight size={18} />

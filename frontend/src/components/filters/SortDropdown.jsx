@@ -13,7 +13,7 @@ export default function SortDropdown({ value, onChange }) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       aria-label="Sort products"
-      className="rounded-full border border-beige bg-white px-4 py-2 text-sm text-maroon-deep focus:border-saffron focus:outline-none dark:border-maroon dark:bg-maroon dark:text-cream"
+      className="rounded-full border border-beige bg-white px-4 py-2 text-sm text-maroon-deep focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/40 dark:border-maroon dark:bg-maroon dark:text-cream"
     >
       {OPTIONS.map((opt) => (
         <option key={opt.value} value={opt.value}>

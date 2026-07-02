@@ -1,6 +1,12 @@
+import SEO from '../components/common/SEO.jsx';
+
 export default function Terms() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
+      <SEO
+        title="Terms & Conditions"
+        description="Terms and conditions for browsing and ordering from Rakhi Store."
+      />
       <h1 className="font-heading text-4xl text-maroon dark:text-cream">
         Terms & Conditions
       </h1>

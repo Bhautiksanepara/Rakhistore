@@ -3,6 +3,7 @@ import { Package, Star, Tags } from 'lucide-react';
 import StatCard from '../../components/admin/StatCard.jsx';
 import { useStats } from '../../hooks/useStats.js';
 import { formatPrice } from '../../utils/formatPrice.js';
+import { optimizeImageUrl } from '../../utils/cloudinary.js';
 
 export default function Dashboard() {
   const { stats, loading } = useStats();
@@ -41,7 +42,7 @@ export default function Dashboard() {
           </h2>
           <Link
             to="/admin/products"
-            className="text-sm text-saffron hover:underline"
+            className="text-sm text-saffron-text hover:underline dark:text-saffron"
           >
             View all
           </Link>
@@ -58,8 +59,9 @@ export default function Dashboard() {
             stats.recentProducts.map((product) => (
               <div key={product._id} className="flex items-center gap-3 py-3">
                 <img
-                  src={product.images?.[0]?.url}
+                  src={optimizeImageUrl(product.images?.[0]?.url, 80)}
                   alt=""
+                  loading="lazy"
                   className="h-10 w-10 rounded-lg bg-beige/40 object-cover"
                 />
                 <div className="min-w-0 flex-1">
@@ -80,7 +82,7 @@ export default function Dashboard() {
 
       <Link
         to="/admin/products/new"
-        className="mt-8 inline-block rounded-full bg-saffron px-6 py-2.5 text-sm font-medium text-white transition hover:bg-saffron-light"
+        className="mt-8 inline-block rounded-full bg-saffron px-6 py-2.5 text-sm font-medium text-maroon-deep transition hover:bg-saffron-light"
       >
         + Add New Product
       </Link>

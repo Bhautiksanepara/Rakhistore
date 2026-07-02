@@ -34,9 +34,9 @@ export default function Navbar() {
                 to={link.to}
                 end={link.to === '/'}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition hover:text-saffron ${
+                  `text-sm font-medium transition hover:text-saffron-text dark:hover:text-saffron ${
                     isActive
-                      ? 'text-saffron'
+                      ? 'text-saffron-text dark:text-saffron'
                       : 'text-maroon-deep dark:text-cream'
                   }`
                 }
@@ -55,7 +55,7 @@ export default function Navbar() {
           >
             <Heart size={20} />
             {wishlist.length > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-saffron text-[10px] font-semibold text-white">
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-saffron text-[10px] font-semibold text-maroon-deep">
                 {wishlist.length}
               </span>
             )}
@@ -93,7 +93,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `block text-sm font-medium ${
                       isActive
-                        ? 'text-saffron'
+                        ? 'text-saffron-text dark:text-saffron'
                         : 'text-maroon-deep dark:text-cream'
                     }`
                   }
