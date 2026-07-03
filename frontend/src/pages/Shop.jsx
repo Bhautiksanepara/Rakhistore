@@ -1,10 +1,11 @@
+import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SEO from '../components/common/SEO.jsx';
 import SearchBar from '../components/filters/SearchBar.jsx';
 import CategoryFilter from '../components/filters/CategoryFilter.jsx';
 import SortDropdown from '../components/filters/SortDropdown.jsx';
 import ProductGrid from '../components/product/ProductGrid.jsx';
-import { useProducts } from '../hooks/useProducts.js';
+import { useInfiniteProducts } from '../hooks/useInfiniteProducts.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 
 const PAGE_SIZE = 12;
@@ -16,7 +17,6 @@ export default function Shop() {
   const category = searchParams.get('category') || '';
   const sort = searchParams.get('sort') || 'newest';
   const newArrival = searchParams.get('newArrival') || undefined;
-  const page = Number(searchParams.get('page')) || 1;
 
   const debouncedSearch = useDebounce(search, 400);
 
@@ -25,25 +25,34 @@ export default function Shop() {
     category: category || undefined,
     sort,
     newArrival,
-    page,
     limit: PAGE_SIZE,
   };
 
-  const { items, total, pages, loading } = useProducts(params);
+  const { items, total, loading, loadingMore, hasMore, loadMore } =
+    useInfiniteProducts(params);
+
+  const sentinelRef = useRef(null);
+
+  useEffect(() => {
+    if (!hasMore) return undefined;
+    const el = sentinelRef.current;
+    if (!el) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) loadMore();
+      },
+      { rootMargin: '600px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasMore, loadMore]);
 
   const updateParam = (key, value) => {
     const next = new URLSearchParams(searchParams);
     if (value) next.set(key, value);
     else next.delete(key);
-    next.delete('page');
     setSearchParams(next);
-  };
-
-  const goToPage = (nextPage) => {
-    const next = new URLSearchParams(searchParams);
-    next.set('page', String(nextPage));
-    setSearchParams(next);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -82,25 +91,18 @@ export default function Shop() {
         <ProductGrid products={items} loading={loading} />
       </div>
 
-      {pages > 1 && (
-        <div className="mt-10 flex items-center justify-center gap-2">
-          {Array.from({ length: pages }).map((_, i) => (
-            <button
-              key={
-                // eslint-disable-next-line react/no-array-index-key
-                i
-              }
-              type="button"
-              onClick={() => goToPage(i + 1)}
-              className={`h-9 w-9 rounded-full text-sm font-medium transition ${
-                page === i + 1
-                  ? 'bg-saffron text-maroon-deep'
-                  : 'bg-white text-maroon-deep hover:bg-saffron/10 dark:bg-maroon dark:text-cream'
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
+      {!loading && items.length > 0 && (
+        <div ref={sentinelRef} className="mt-10 flex justify-center py-6">
+          {loadingMore && (
+            <span className="text-sm text-maroon-deep/50 dark:text-cream/50">
+              Loading more…
+            </span>
+          )}
+          {!hasMore && (
+            <span className="text-sm text-maroon-deep/50 dark:text-cream/50">
+              You&rsquo;ve seen all {total} product{total === 1 ? '' : 's'}.
+            </span>
+          )}
         </div>
       )}
     </div>

@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { AnimatePresence } from 'framer-motion';
 import { optimizeImageUrl } from '../../utils/cloudinary.js';
+import ImageLightbox from './ImageLightbox.jsx';
 
 export default function ProductGallery({ images, productName }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [zoomStyle, setZoomStyle] = useState({ opacity: 0 });
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const containerRef = useRef(null);
 
   if (images.length === 0) {
@@ -33,11 +36,14 @@ export default function ProductGallery({ images, productName }) {
 
   return (
     <div>
-      <div
+      <button
+        type="button"
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative aspect-square cursor-zoom-in overflow-hidden rounded-2xl bg-beige/40 dark:bg-maroon/40"
+        onClick={() => setLightboxOpen(true)}
+        aria-label="View full-screen image"
+        className="relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-beige/40 dark:bg-maroon/40"
       >
         <img
           src={activeImage}
@@ -49,7 +55,7 @@ export default function ProductGallery({ images, productName }) {
           className="pointer-events-none absolute inset-0 hidden bg-no-repeat opacity-0 transition-opacity duration-150 md:block"
           style={{ backgroundSize: '200%', ...zoomStyle }}
         />
-      </div>
+      </button>
 
       {images.length > 1 && (
         <div className="mt-4 flex gap-3">
@@ -76,6 +82,17 @@ export default function ProductGallery({ images, productName }) {
           ))}
         </div>
       )}
+
+      <AnimatePresence>
+        {lightboxOpen && (
+          <ImageLightbox
+            images={images}
+            initialIndex={activeIndex}
+            productName={productName}
+            onClose={() => setLightboxOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
