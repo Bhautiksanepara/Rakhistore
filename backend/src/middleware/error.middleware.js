@@ -7,7 +7,13 @@ export function notFound(req, res, next) {
 // eslint-disable-next-line no-unused-vars
 export function errorHandler(err, req, res, next) {
   const statusCode = err.statusCode && err.statusCode >= 400 ? err.statusCode : 500;
-  const message = err.message || 'Internal Server Error';
+  const isDuplicateKey = err.code === 11000;
+  const duplicateField = isDuplicateKey
+    ? Object.keys(err.keyPattern || err.keyValue || {})[0]
+    : null;
+  const message = isDuplicateKey
+    ? `${duplicateField || 'Field'} already exists. Please try again.`
+    : err.message || 'Internal Server Error';
 
   if (process.env.NODE_ENV !== 'production') {
     console.error(err);

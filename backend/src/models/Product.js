@@ -31,6 +31,21 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+async function generateSku() {
+  let sku;
+
+  do {
+    const uniquePart = new mongoose.Types.ObjectId()
+      .toString()
+      .slice(-8)
+      .toUpperCase();
+    sku = `RKH-${uniquePart}`;
+    // eslint-disable-next-line no-await-in-loop
+  } while (await mongoose.models.Product.exists({ sku }));
+
+  return sku;
+}
+
 productSchema.pre('validate', async function () {
   if (this.name && (this.isNew || this.isModified('name'))) {
     const base = slugify(this.name, { lower: true, strict: true });
@@ -51,8 +66,7 @@ productSchema.pre('validate', async function () {
 
 productSchema.pre('save', async function () {
   if (!this.sku) {
-    const count = await mongoose.models.Product.countDocuments();
-    this.sku = `RKH-${String(count + 1).padStart(4, '0')}`;
+    this.sku = await generateSku();
   }
 });
 
